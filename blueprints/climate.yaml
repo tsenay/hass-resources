@@ -1,0 +1,365 @@
+blueprint:
+  name: Set thermostat temperature at specific time
+  description: Sets a climate entity to a specifc temperature at a set time everyday. Start with the earliest time of the day i.e. 12:10 AM and end with the latest i.e. 11:00 PM in ascending order. At least one time/temperature pair has to be set.
+  domain: automation
+  input:
+    climate_entity:
+      name: Thermostat
+      description: Climate entity which will get the temperature update
+      selector:
+        entity:
+          domain: climate
+    active_flag:
+      name: Activity flag
+      description: Input boolean flag as condition for execution
+      selector:
+        entity:
+          domain: input_boolean
+    active_when:
+      name: Automation is applied when activity flag is equal to
+      description: Selection if automation is active at ON or OFF value of the flag
+      selector:
+        select:
+          options:
+            - 'on'
+            - 'off'
+    time_to_set_1:
+      name: Time_1
+      default:
+      description: When should the temperature be set
+      selector:
+        time: {}
+    temp_to_set_1:
+      name: Temperature_1
+      description: Temperature to set on defined time
+      default: 19.5
+      selector:
+        number:
+          min: 10.0
+          max: 30.0
+          unit_of_measurement: degrees
+          step: 0.5
+          mode: slider
+    time_to_set_2:
+      name: Time_2
+      description: When should the temperature be set
+      default: 
+      selector:
+        time: {}
+    temp_to_set_2:
+      name: Temperature_2
+      description: Temperature to set on defined time
+      default: 19.5
+      selector:
+        number:
+          min: 10.0
+          max: 30.0
+          unit_of_measurement: degrees
+          step: 0.5
+          mode: slider
+    time_to_set_3:
+      name: Time_3
+      description: When should the temperature be set
+      default:
+      selector:
+        time: {}
+    temp_to_set_3:
+      name: Temperature_3
+      description: Temperature to set on defined time
+      default: 19.5
+      selector:
+        number:
+          min: 10.0
+          max: 30.0
+          unit_of_measurement: degrees
+          step: 0.5
+          mode: slider
+    time_to_set_4:
+      name: Time_4
+      default:
+      description: When should the temperature be set
+      selector:
+        time: {}
+    temp_to_set_4:
+      name: Temperature_4
+      description: Temperature to set on defined time
+      default: 19.5
+      selector:
+        number:
+          min: 10.0
+          max: 30.0
+          unit_of_measurement: degrees
+          step: 0.5
+          mode: slider
+    time_to_set_5:
+      name: Time_5
+      description: When should the temperature be set
+      default: 
+      selector:
+        time: {}
+    temp_to_set_5:
+      name: Temperature_5
+      description: Temperature to set on defined time
+      default: 19.5
+      selector:
+        number:
+          min: 10.0
+          max: 30.0
+          unit_of_measurement: degrees
+          step: 0.5
+          mode: slider
+    time_to_set_6:
+      name: Time_6
+      description: When should the temperature be set
+      default:
+      selector:
+        time: {}
+    temp_to_set_6:
+      name: Temperature_6
+      description: Temperature to set on defined time
+      default: 19.5
+      selector:
+        number:
+          min: 10.0
+          max: 30.0
+          unit_of_measurement: degrees
+          step: 0.5
+          mode: slider
+    time_to_set_7:
+      name: Time_7
+      default:
+      description: When should the temperature be set
+      selector:
+        time: {}
+    temp_to_set_7:
+      name: Temperature_7
+      description: Temperature to set on defined time
+      default: 19.5
+      selector:
+        number:
+          min: 10.0
+          max: 30.0
+          unit_of_measurement: degrees
+          step: 0.5
+          mode: slider
+    time_to_set_8:
+      name: Time_8
+      description: When should the temperature be set
+      default: 
+      selector:
+        time: {}
+    temp_to_set_8:
+      name: Temperature_8
+      description: Temperature to set on defined time
+      default: 19.5
+      selector:
+        number:
+          min: 10.0
+          max: 30.0
+          unit_of_measurement: degrees
+          step: 0.5
+          mode: slider
+    time_to_set_9:
+      name: Time_9
+      description: When should the temperature be set
+      default:
+      selector:
+        time: {}
+    temp_to_set_9:
+      name: Temperature_9
+      description: Temperature to set on defined time
+      default: 19.5
+      selector:
+        number:
+          min: 10.0
+          max: 30.0
+          unit_of_measurement: degrees
+          step: 0.5
+          mode: slider
+    time_to_set_10:
+      name: Time_10
+      description: When should the temperature be set
+      default:
+      selector:
+        time: {}
+    temp_to_set_10:
+      name: Temperature_10
+      description: Temperature to set on defined time
+      default: 19.5
+      selector:
+        number:
+          min: 10.0
+          max: 30.0
+          unit_of_measurement: degrees
+          step: 0.5
+          mode: slider
+
+trigger:
+- platform: state
+  entity_id: !input active_flag
+  id: set_last_temperature
+- platform: time
+  at: !input 'time_to_set_1'
+  id: time_1
+- platform: time
+  at: !input 'time_to_set_2'
+  id: time_2
+- platform: time
+  at: !input 'time_to_set_3'
+  id: time_3
+- platform: time
+  at: !input 'time_to_set_4'
+  id: time_4
+- platform: time
+  at: !input 'time_to_set_5'
+  id: time_5
+- platform: time
+  at: !input 'time_to_set_6'
+  id: time_6
+- platform: time
+  at: !input 'time_to_set_7'
+  id: time_7
+- platform: time
+  at: !input 'time_to_set_8'
+  id: time_8
+- platform: time
+  at: !input 'time_to_set_9'
+  id: time_9
+- platform: time
+  at: !input 'time_to_set_10'
+  id: time_10
+  
+condition:
+  - condition: state
+    entity_id: !input active_flag
+    state: !input 'active_when'
+action:
+- choose:
+    - conditions:
+        - condition: trigger
+          id: set_last_temperature
+      sequence:
+        - alias: "Find T to be set"
+          variables:
+            T_1:     !input temp_to_set_1
+            T_2:     !input temp_to_set_2
+            T_3:     !input temp_to_set_3
+            T_4:     !input temp_to_set_4
+            T_5:     !input temp_to_set_5
+            T_6:     !input temp_to_set_6
+            T_7:     !input temp_to_set_7
+            T_8:     !input temp_to_set_8
+            T_9:     !input temp_to_set_9
+            T_10:    !input temp_to_set_10
+            time_1:  !input time_to_set_1
+            time_2:  !input time_to_set_2
+            time_3:  !input time_to_set_3
+            time_4:  !input time_to_set_4
+            time_5:  !input time_to_set_5
+            time_6:  !input time_to_set_6
+            time_7:  !input time_to_set_7
+            time_8:  !input time_to_set_8
+            time_9:  !input time_to_set_9
+            time_10: !input time_to_set_10
+            T: >-
+              {% set all_values = [[time_10, T_10],[time_9, T_9],[time_8, T_8],[time_7, T_7],[time_6, T_6],[time_5, T_5],[time_4, T_4],[time_3, T_3],[time_2, T_2],[time_1, T_1]] %}
+              {% set result = namespace(time_curr = strptime( (((as_timestamp(now()) | int ) | timestamp_custom("%H:%M:%S")) | string), "%H:%M:%S"), temp_last = all_values[all_values|length()-1][1]) %}
+              {# loop from last time of the day, till first set time #}
+              {% for curr_values  in all_values -%}
+                {% if curr_values[0] and (strptime(curr_values[0], "%H:%M:%S") < result.time_curr) -%}
+                  {# we found previous closest time to now() #}
+                  {# store the temperature #}
+                  {% set result.temp_last = curr_values[1] -%}
+                  {# break the loop #}
+                  {% set result.time_curr = strptime('00:00:00', "%H:%M:%S") -%}
+                {% endif %}
+              {% endfor %}
+              {{ result.temp_last }}
+        - service: climate.set_temperature
+          entity_id: !input 'climate_entity'
+          data:
+            temperature: "{{ T }}"
+    - conditions:
+        - condition: trigger
+          id: time_1
+      sequence:
+        - service: climate.set_temperature
+          entity_id: !input 'climate_entity'
+          data:
+            temperature: !input 'temp_to_set_1'
+    - conditions:
+        - condition: trigger
+          id: time_2
+      sequence:
+        - service: climate.set_temperature
+          entity_id: !input 'climate_entity'
+          data:
+            temperature: !input 'temp_to_set_2'
+    - conditions:
+        - condition: trigger
+          id: time_3
+      sequence:
+        - service: climate.set_temperature
+          entity_id: !input 'climate_entity'
+          data:
+            temperature: !input 'temp_to_set_3'
+    - conditions:
+        - condition: trigger
+          id: time_4
+      sequence:
+        - service: climate.set_temperature
+          entity_id: !input 'climate_entity'
+          data:
+            temperature: !input 'temp_to_set_4'
+    - conditions:
+        - condition: trigger
+          id: time_5
+      sequence:
+        - service: climate.set_temperature
+          entity_id: !input 'climate_entity'
+          data:
+            temperature: !input 'temp_to_set_5'
+    - conditions:
+        - condition: trigger
+          id: time_6
+      sequence:
+        - service: climate.set_temperature
+          entity_id: !input 'climate_entity'
+          data:
+            temperature: !input 'temp_to_set_6'
+    - conditions:
+        - condition: trigger
+          id: time_7
+      sequence:
+        - service: climate.set_temperature
+          entity_id: !input 'climate_entity'
+          data:
+            temperature: !input 'temp_to_set_7'
+    - conditions:
+        - condition: trigger
+          id: time_8
+      sequence:
+        - service: climate.set_temperature
+          entity_id: !input 'climate_entity'
+          data:
+            temperature: !input 'temp_to_set_8'
+    - conditions:
+        - condition: trigger
+          id: time_9
+      sequence:
+        - service: climate.set_temperature
+          entity_id: !input 'climate_entity'
+          data:
+            temperature: !input 'temp_to_set_9'
+    - conditions:
+        - condition: trigger
+          id: time_10
+      sequence:
+        - service: climate.set_temperature
+          entity_id: !input 'climate_entity'
+          data:
+            temperature: !input 'temp_to_set_10'
+  default: []
+
+mode: queued
+
